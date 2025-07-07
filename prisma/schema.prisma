@@ -21,5 +21,18 @@ model User {
   password  String
   confirm_password  String
   createdAt DateTime @default(now())
+  otps      Otp[]    // Relation to Otp model
 }
+
+model Otp {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  otp       String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
 
